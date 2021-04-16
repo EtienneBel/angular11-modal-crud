@@ -3,31 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './layouts/header/header.component';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { MenuComponent } from './layouts/menu/menu.component';
-import { SettingsComponent } from './layouts/settings/settings.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { WidgetsComponent } from './widgets/widgets.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { GalleryComponent } from './gallery/gallery.component';
+import { DataTablesModule } from 'angular-datatables';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EmployeeComponent } from './employee/employee.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    MenuComponent,
-    SettingsComponent,
-    DashboardComponent,
-    WidgetsComponent,
-    CalendarComponent,
-    GalleryComponent
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // DATATABLE
+    DataTablesModule,
+    // MODAL
+    NgbModule,
+    HttpClientModule,
+    // FORMS
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

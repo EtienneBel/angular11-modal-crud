@@ -1,0 +1,104 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>CRUD - EMPLOYES</h1>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Liste des employes</h3>
+                            <button type="button" class="btn btn-primary" (click)="createModal(mymodal)" style="float: right;">Nouveau
+                Employe</button>
+                        </div>
+                        <div class="card-body">
+                            <table *ngIf="employeesList; else noData" datatable="ng" [dtOptions]="dtOptions" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of employeesList;">
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.username }}</td>
+                                        <td>{{ item.email }}</td>
+                                        <td>
+                                            <!-- <button type="button" class="btn btn-block btn-info">Details</button>
+                                          <button type="button" class="btn btn-block btn-primary">Enregistrer</button> -->
+                                            <!-- <button type="button" class="btn btn-warning" style="margin-right: 10px;" (click)="updateModal(categorie.id, mymodal)">Editer</button> -->
+                                            <button type="button" class="btn btn-danger" style="margin-right: 10px;">Supprimer</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ng-template #noData>
+                                <table class="table table-hover table-bordered">
+                                </table>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Nouveau Employe</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+        aria-hidden="true">&times;</span></button>
+    </div>
+    <!-- form start -->
+    <form [formGroup]="formEmployee" (ngSubmit)="onSubmit()" novalidate>
+        <div class="modal-body">
+            <input type="hidden" class="form-control" formControlName="id">
+            <div class="form-group required">
+                <label class="control-label">Username</label>
+                <input type="text" class="form-control" formControlName="username" required [ngClass]="{ 'is-invalid': ( isFormSubmitted && !formEmployee.controls.username.errors) || (!formEmployee.controls.username.pristine && formEmployee.controls.username.invalid) }">
+
+                <!-- Validation messages -->
+                <!-- <div class="invalid-feedback" *ngIf="(!formEmployee.controls.username.errors) || (!formEmployee.controls.username.pristine && formEmployee.controls.username.invalid)"> -->
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && !formEmployee.controls.username.errors) || (!formEmployee.controls.username.pristine && formEmployee.controls.username.invalid)">
+                    <div *ngIf="formEmployee.controls.username.errors?.required">Champ obligatoire.</div>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="control-label">Email</label>
+                <input type="text" class="form-control" formControlName="email" required [ngClass]="{ 'is-invalid': (isFormSubmitted && !formEmployee.controls.email.errors) || (!formEmployee.controls.email.pristine && formEmployee.controls.email.invalid) }">
+
+                <!-- Validation messages -->
+                <!-- <div class="invalid-feedback" *ngIf="(!formEmployee.controls.email.errors) || (!formEmployee.controls.email.pristine && formEmployee.controls.email.invalid)"> -->
+                <div class="invalid-feedback" *ngIf="(isFormSubmitted && !formEmployee.controls.email.errors) || (!formEmployee.controls.email.pristine && formEmployee.controls.email.invalid)">
+                    <div *ngIf="formEmployee.controls.email.errors?.required">Champ obligatoire.</div>
+                    <div *ngIf="formEmployee.controls.email.errors?.minlength">Minimum 4 caracteres.</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button class="btn btn-primary" type="submit" [disabled]="!formEmployee.valid" style="float: right;">Enregistrer</button>
+        </div>
+    </form>
+</ng-template>
