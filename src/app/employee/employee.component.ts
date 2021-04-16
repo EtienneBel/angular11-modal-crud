@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { DataTableDirective } from 'angular-datatables';
 import { Employee } from 'src/app/_models/employee.model';
 import { EmployeeService } from 'src/app/_services/employee.service';
-import { DatatableLanguage } from 'src/app/_helpers/datatable-language';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalFunctions } from 'src/app/_helpers/modal-functions';
+import { ModalFunctions } from '../_helpers/modal-functions';
+import { DatatableLanguage } from '../_helpers/datatable-language';
 
 @Component({
   selector: 'app-employee',
